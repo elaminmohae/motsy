@@ -30,13 +30,21 @@ private Connection conexion;
         setMoto(moto);
     }
 
-    public void insertData(String inputCarrera) throws ClassNotFoundException {
+    public void insertData(Moto inputMoto) throws ClassNotFoundException {
         try {
             DbConnect.loadDriver();
             Connection con = new DbConnect().getConexion();
-            String SQLQuery = "INSERT INTO motos" + " (nombre) VALUES" + "(?);";
+            String SQLQuery = "INSERT INTO motos" + " (`idmotos`, `modelo`, `marca`, `añoFabricacion`, `motor`, `estado`, `precio`, `matricula`) VALUES" + "(?,?,?,?,?,?,?,?);";
             PreparedStatement pt = con.prepareStatement(SQLQuery);
-            pt.setString(1, inputCarrera);
+            pt.setInt(1, inputMoto.idmotos);
+            pt.setString(2, inputMoto.modelo);
+            pt.setString(3, inputMoto.marca);
+            pt.setInt(4, inputMoto.añoFabricacion);
+            pt.setString(5, inputMoto.motor);
+            pt.setBoolean(6,inputMoto.estado);
+            pt.setInt(7, inputMoto.precio);
+            pt.setInt(8, inputMoto.matricula);
+                    
             pt.executeUpdate();
             System.out.println("Se ha insertado el registro correctamente");
             pt.close();
@@ -54,9 +62,9 @@ private Connection conexion;
             PreparedStatement pt = con.prepareStatement(SQLQuery);
             ResultSet rs = pt.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String nombre = rs.getString("nombre");
-                Moto moto = new Moto(id, nombre);
+                int id = rs.getInt("idmotos");
+                String nombre = rs.getString("modelo");
+                Moto moto = new Moto();
                 Moto.add(motos);
             }
         } catch (SQLException ex) {
@@ -66,28 +74,41 @@ private Connection conexion;
     }
 
 
-    public static void deleteData(int id) throws ClassNotFoundException{
+    public static void deleteData(Moto deleteMoto) throws ClassNotFoundException{
         try {
             DbConnect.loadDriver();
             Connection con = new DbConnect().getConexion();
-            String SQLQuery = "DELETE FROM " + "motos" + " WHERE id = ?;";
+            String SQLQuery = "DELETE FROM motos WHERE idmotos = ? AND modelo = ? AND marca = ? AND añoFabricacion = ? AND motor = ? AND estado = ? AND precio = ? AND matricula = ?";
             try (PreparedStatement pt = con.prepareStatement(SQLQuery)) {
-                pt.setInt(1, id);
+                pt.setInt(1, deleteMoto.idmotos);
+                pt.setString(2, deleteMoto.modelo);
+                pt.setString(3, deleteMoto.marca);
+                pt.setInt(4, deleteMoto.añoFabricacion);
+                pt.setString(5, deleteMoto.motor);
+                pt.setBoolean(6,deleteMoto.estado);
+                pt.setInt(7, deleteMoto.precio);
+                pt.setInt(8, deleteMoto.matricula);
                 pt.executeUpdate();
             }
         } catch (SQLException e) {
             System.err.println("Error borrando los datos seleccionados: " + e.getMessage());
         }
     }
-    public static void updateData(int id, String nombreNuevo) throws ClassNotFoundException {
+    public static void updateData(Moto updateMoto) throws ClassNotFoundException {
         try {
             DbConnect.loadDriver();
             Connection con = new DbConnect().getConexion();
-            String query = "UPDATE motos SET nombre = ? WHERE id = ? "; 
+            String query = "UPDATE motos SET modelo = ? WHERE idmotos = ? AND modelo = ? AND marca = ? AND añoFabricacion = ? AND motor = ? AND estado = ? AND precio = ? AND matricula = ?"; 
             try (PreparedStatement pt = con.prepareStatement(query)) {
-                pt.setString(1, nombreNuevo);
-                pt.setInt(2, id);
-                pt.executeUpdate();
+                 pt.setInt(1, updateMoto.idmotos);
+                 pt.setString(2, updateMoto.modelo);
+                 pt.setString(3, updateMoto.marca);
+                 pt.setInt(4, updateMoto.añoFabricacion);
+                 pt.setString(5, updateMoto.motor);
+                 pt.setBoolean(6,updateMoto.estado);
+                 pt.setInt(7, updateMoto.precio);
+                 pt.setInt(8, updateMoto.matricula);
+                 pt.executeUpdate();
             }
         } catch (SQLException e) {
             System.err.println("Error actualizando los datos: " + e.getMessage());

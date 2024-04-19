@@ -17,20 +17,45 @@ public class Moto{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private String modelo;
-    private int id;
-    private String marca;
-    private int añoFabricacion;
-    private boolean estado;
-    private int precio;
-    private int matricula;
-
+    public String modelo;
+    public int idmotos;
+    public String marca;
+    public int añoFabricacion;
+    public boolean estado;
+    public int precio;
+    public String motor;
+    public int matricula;
+    
+    
+    
+    
+    public Moto(int idmotos ,String modelo, String marca, int añoFabricacion, boolean estado, int precio, int matricula) {
+        this.modelo = modelo;
+        this.idmotos = idmotos;
+        this.marca = marca;
+        this.añoFabricacion = añoFabricacion;
+        this.estado = estado;
+        this.precio = precio;
+        this.matricula = matricula;
+    }
+    
+    public Moto(){
+        
+    }
     public String getMarca() {
         return marca;
     }
 
     public int getAñoFabricacion() {
         return añoFabricacion;
+    }
+
+    public String getMotor() {
+        return motor;
+    }
+
+    public void setMotor(String motor) {
+        this.motor = motor;
     }
 
     public void setMarca(String marca) {
@@ -62,8 +87,7 @@ public class Moto{
     }
     
     
-    public Moto(){
-    }
+    
     public Moto (String nombrep){
         this.modelo = nombrep;
     }
@@ -85,11 +109,11 @@ public class Moto{
     
 
     public int getId() {
-       return id;
+       return idmotos;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idmotos = id;
     }
 }
 
