@@ -1,6 +1,31 @@
-body{
+body {
+    background-image: url('ruta/de/la/imagen.jpg');
 
+    /* Ajusta el tamaño de la imagen para cubrir todo el cuerpo */
+    background-size: cover;
+
+    /* Fija la posición de la imagen en la parte superior izquierda */
+    background-position: top left;
+
+    /* Opcional: Establece un color de fondo de respaldo en caso de que la imagen no se cargue */
+    background-color: #f0f0f0; /* Cambia el color según tus preferencias */
+
+    /* Asegúrate de que el fondo se repita si la imagen no cubre completamente */
+    background-repeat: no-repeat;
+
+    /* Ajusta la altura para que el fondo cubra toda la altura del contenido */
+    min-height: 100vh;
 }
+
 header{
     display: block;
+}
+.container-fluid{
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center; /* Centra verticalmente */
+        height: 250px; /* Altura del contenedor */
+    }
+
+
 }
