@@ -29,6 +29,7 @@
     <ul>
         <li>Como contactare on el dueño de la moto?</li>
         <li>Quando sabre el precio del renting</li>
+        <li></li>
     </ul>
 </div>
 </body>
